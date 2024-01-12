@@ -1,5 +1,19 @@
 $(document).ready(function() {
 	let selectedAmenities = {};
+
+	// Function to update the api status
+	$.get('http://0.0.0.0:5001/api/v1/status/', function(data) {
+		// Check if the status is "OK"
+		if (data.status === 'OK') {
+			// add class 'available' to div#api_status
+			$('#api_status').addClass('available');
+		} else {
+			// status is not 'OK', remove class 'available'
+			$('#api_status').removeClass('available');
+		}
+	});
+
+	updateApiStatus();
 	
 	// Listen for changes on each checkbox input
 	$('input[type="checkbox"]').change(function() {
